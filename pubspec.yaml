@@ -19,7 +19,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.jsr.flutter_volume_controller
+        package: com.jsr.flutter_volume
         pluginClass: FlutterVolumeControllerPlugin
       # ios:
       #   pluginClass: FlutterVolumeControllerPlugin
