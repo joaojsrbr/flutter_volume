@@ -1,6 +1,6 @@
 name: flutter_volume
 description: A Flutter plugin to control system volume and listen for volume changes on different platforms.
-version: 1.0.0
+version: 1.0.1
 
 environment:
   sdk: ">=2.17.6 <3.0.0"

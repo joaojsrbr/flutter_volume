@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'src/audio_stream.dart';
 import 'src/constants.dart';
 
-/// A Flutter plugin to control system volume and listen for volume changes on different platforms.
+/// Um plugin Flutter para controlar o volume do sistema e ouvir as mudanças de volume em diferentes plataformas.
 class FlutterVolumeController {
   const FlutterVolumeController._();
 
@@ -17,16 +17,11 @@ class FlutterVolumeController {
   @visibleForTesting
   static const EventChannel eventChannel = EventChannel('com.jsr.flutter_volume/event');
 
-  /// Listener for volume change events.
+  /// Ouvinte para eventos de alteração de volume
   static StreamSubscription<double>? _volumeListener;
 
-  /// Control system UI visibility.
-  /// Set to `true` to display volume slider when changing volume.
-  /// This settings only works on Android and iOS.
-  // static bool showSystemUI = true;
-
-  /// Get the current volume level. From 0.0 to 1.0.
-  /// Use [stream] to set the audio stream type on Android.
+  /// Obtém o nível de volume atual. De 0.0 a 1.0.
+  /// Use [stream] para definir o tipo de fluxo de áudio no Android.
   static Future<double?> getVolume({
     AudioStream stream = AudioStream.music,
   }) async {
@@ -40,8 +35,8 @@ class FlutterVolumeController {
     return receivedValue != null ? double.parse(receivedValue) : null;
   }
 
-  /// Set the volume level. From 0.0 to 1.0.
-  /// Use [stream] to set the audio stream type on Android.
+  /// Definir o nível de volume. De 0.0 a 1.0.
+  /// Use [stream] para definir o tipo de fluxo de áudio no Android.
   static Future<void> setVolume(
     double volume, {
     AudioStream stream = AudioStream.music,
@@ -66,12 +61,12 @@ class FlutterVolumeController {
     );
   }
 
-  /// Increase the volume level by [step]. From 0.0 to 1.0.
-  /// On Android and Windows, when [step] is set to null, it will uses the
-  /// default system stepping value.
-  /// On iOS, macOS, Linux, if [step] is not defined, the default
-  /// stepping value is set to 0.15.
-  /// Use [stream] to set the audio stream type on Android.
+  /// Aumente o nível de volume em [step]. De 0.0 a 1.0.
+  /// No Android e no Windows, quando [step] estiver definido como nulo, ele usará o
+  /// valor de passo padrão do sistema.
+  /// No iOS, macOS, Linux, se [step] não for definido, o padrão
+  /// o valor do passo é definido como 0.15.
+  /// Use [stream] para definir o tipo de fluxo de áudio no Android.
   static Future<void> raiseVolume(
     double? step, {
     AudioStream stream = AudioStream.music,
@@ -87,12 +82,12 @@ class FlutterVolumeController {
     );
   }
 
-  /// Decrease the volume level by [step]. From 0.0 to 1.0.
-  /// On Android and Windows, when [step] is set to null, it will uses the
-  /// default system stepping value.
-  /// On iOS, macOS, Linux, if [step] is not defined, the default
-  /// stepping value is set to 0.15.
-  /// Use [stream] to set the audio stream type on Android.
+  /// Diminuir o nível de volume em [step]. De 0.0 a 1.0.
+  /// No Android e no Windows, quando [step] estiver definido como nulo, ele usará o
+  /// valor de passo padrão do sistema.
+  /// No iOS, macOS, Linux, se [step] não for definido, o padrão
+  /// o valor do passo é definido como 0.15.
+  /// Use [stream] para definir o tipo de fluxo de áudio no Android.
   static Future<void> lowerVolume(
     double? step, {
     AudioStream stream = AudioStream.music,
@@ -108,11 +103,11 @@ class FlutterVolumeController {
     );
   }
 
-  /// Check if the volume is muted.
-  /// On Android and iOS, we check if the current volume level is already
-  /// dropped to zero.
-  /// On macOS, Windows, Linux, we check if the mute switch is turned on.
-  /// Use [stream] to set the audio stream type on Android.
+  /// Verifique se o volume está mudo.
+  /// No Android e iOS, verificamos se o nível de volume atual já está
+  /// caiu para zero.
+  /// No macOS, Windows, Linux, verificamos se o botão mudo está ativado.
+  /// Use [stream] para definir o tipo de fluxo de áudio no Android.
   static Future<bool?> getMute({
     AudioStream stream = AudioStream.music,
   }) async {
@@ -124,11 +119,11 @@ class FlutterVolumeController {
     );
   }
 
-  /// Mute or unmute the volume.
-  /// On Android and iOS, we either set the volume to zero or revert to the previous level.
-  /// On macOS, Windows, Linux, we control the mute switch. Volume will be restored
-  /// once it's unmuted.
-  /// Use [stream] to set the audio stream type on Android.
+  /// Silenciar ou ativar o volume.
+  /// No Android e iOS, definimos o volume para zero ou voltamos ao nível anterior.
+  /// No macOS, Windows, Linux, controlamos o botão mudo. O volume será restaurado
+  /// uma vez ativado o som.
+  /// Use [stream] para definir o tipo de fluxo de áudio no Android.
   static Future<void> setMute(
     bool isMuted, {
     AudioStream stream = AudioStream.music,
@@ -144,9 +139,9 @@ class FlutterVolumeController {
     );
   }
 
-  /// Toggle between the volume mute and unmute state.
-  /// Please refers to [setMute] for platform behaviors.
-  /// Use [stream] to set the audio stream type on Android.
+  /// Alternar entre o estado de silenciar e ativar o volume.
+  /// Consulte [setMute] para conhecer os comportamentos da plataforma.
+  /// Use [stream] para definir o tipo de fluxo de áudio no Android.
   static Future<void> toggleMute({
     AudioStream stream = AudioStream.music,
     bool showSystemUI = true,
@@ -157,9 +152,9 @@ class FlutterVolumeController {
     );
   }
 
-  /// Set the default audio stream on Android.
-  /// This method should be called to ensure that volume controls adjust the correct stream.
-  /// Use [stream] to set the audio stream type on Android.
+  /// Defina o fluxo de áudio padrão no Android.
+  /// Este método deve ser chamado para garantir que os controles de volume ajustem o fluxo correto.
+  /// Use [stream] para definir o tipo de fluxo de áudio no Android.
   static Future<void> setAndroidAudioStream({
     AudioStream stream = AudioStream.music,
   }) async {
@@ -171,10 +166,10 @@ class FlutterVolumeController {
     }
   }
 
-  /// Listen for volume changes.
-  /// Use [emitOnStart] to control whether volume value should be emitted
-  /// immediately right after the listener is attached.
-  /// Use [stream] to set the audio stream type on Android.
+  /// Ouça as mudanças de volume.
+  /// Use [emitOnStart] para controlar se o valor do volume deve ser emitido
+  /// imediatamente logo após o ouvinte ser anexado.
+  /// Use [stream] para definir o tipo de fluxo de áudio no Android.
   static StreamSubscription<double> addListener(
     ValueChanged<double> onChanged, {
     AudioStream stream = AudioStream.music,
@@ -197,7 +192,7 @@ class FlutterVolumeController {
     return listener;
   }
 
-  /// Remove the volume listener.
+  /// Remova o ouvinte de volume.
   static void removeListener() {
     _volumeListener?.cancel();
     _volumeListener = null;
