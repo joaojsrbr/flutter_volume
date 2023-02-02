@@ -17,9 +17,9 @@ class VolumeController(private val audioManager: AudioManager) {
         )
     }
 
-    fun setSystemUI(showSystemUI: Boolean){
+    fun setSystemUI(showSystemUI: Boolean,audioStream: AudioStream){
         audioManager.adjustStreamVolume(
-        audioStream.streamType,
+            audioStream.streamType,
            audioManager.getStreamVolume(AudioManager.STREAM_MUSIC),
            if (showSystemUI) AudioManager.FLAG_SHOW_UI else 0
         )

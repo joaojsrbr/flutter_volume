@@ -60,7 +60,8 @@ class FlutterVolumeControllerPlugin : FlutterPlugin, ActivityAware, MethodCallHa
             MethodName.SET_SYSTEMUI -> {
                 try {
                     val showSystemUI = call.argument<Boolean>(MethodArg.SHOW_SYSTEM_UI)!!
-                    volumeController.setSystemUI(showSystemUI)
+                    val audioStream = call.argument<Int>(MethodArg.AUDIO_STREAM)!!
+                    volumeController.setSystemUI(showSystemUI,AudioStream.values()[audioStream])
                      result.success(null)
                 } catch(e: Exception) {
                     result.error(ErrorCode.SET_SYSTEMUI, ErrorMessage.SET_SYSTEMUI, e.message)
